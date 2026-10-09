@@ -1,0 +1,604 @@
+/* ============================================================
+   toko-roti/site.css — identitas visual "Tungku Roti"
+   Palet dari bahan: tepung, adonan, gandum, gula merah, kerak.
+   Huruf: Fraunces (label kemasan) + Karla (teks).
+   ============================================================ */
+
+:root {
+  /* Warna bernama — identitas hangat membumi */
+  --flour: #faf4e8;      /* tepung terigu */
+  --dough: #f3e7cf;      /* adonan yang diuleni */
+  --wheat: #dcb26a;      /* biji gandum matang */
+  --palm: #a5581f;       /* gula merah cair */
+  --crust: #5b3413;      /* kerak roti yang matang */
+  --ash: #8a6f52;        /* abu dapur, untuk teks lemah */
+
+  /* Timpa token shared/base.css */
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+
+  --color-bg: var(--flour);
+  --color-surface: var(--dough);
+  --color-ink: var(--crust);
+  --color-muted: var(--ash);
+  --color-line: #e6d5b5;
+  --color-accent: var(--palm);
+  --color-accent-ink: #fff8ee;
+  --color-accent-soft: #f7e6cb;
+
+  --shadow-card: 0 12px 36px rgba(91, 52, 19, 0.1);
+}
+
+/* ---- Judul pakai aksen huruf miring kemasan ---- */
+.section-title em,
+.hero-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* ---- Navbar ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 244, 232, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-line);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.75rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--wheat), var(--palm));
+  color: #fff8ee;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.nav-links a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.nav-toggle {
+  display: none;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 5px auto;
+  background: var(--color-ink);
+  border-radius: 2px;
+}
+@media (max-width: 760px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--flour);
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 1rem 1.25rem;
+  }
+  .nav-menu.open {
+    display: flex;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-links a {
+    display: block;
+    padding: 0.85rem 0.25rem;
+    border-bottom: 1px dashed var(--color-line);
+  }
+  .nav-cta {
+    margin-top: 0.9rem;
+  }
+}
+
+/* ---- Hero ---- */
+.hero {
+  background:
+    radial-gradient(1200px 500px at 85% -10%, rgba(220, 178, 106, 0.35), transparent 60%),
+    var(--color-bg);
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+  max-width: 16ch;
+}
+.hero-desc {
+  margin-top: 1.1rem;
+  color: var(--color-muted);
+  max-width: 48ch;
+  font-size: 1.06rem;
+}
+.hero-actions {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.hero-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-note .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--palm);
+  flex: none;
+}
+
+/* Visual hero: lingkaran oven hangat + roti SVG */
+.hero-art {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.oven-blob {
+  width: min(420px, 86vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 38%, #f6dfae 0%, var(--wheat) 45%, var(--palm) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 24px 60px rgba(91, 52, 19, 0.18);
+}
+.oven-blob svg {
+  width: 62%;
+}
+.oven-chip {
+  position: absolute;
+  background: #fffdf8;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.oven-chip .flame {
+  color: var(--palm);
+  font-size: 1.05rem;
+}
+.oven-chip--am { top: 6%; left: 2%; }
+.oven-chip--pm { bottom: 8%; right: 2%; }
+
+/* ---- Kartu produk ---- */
+.product-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 640px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: #fffdf8;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.product-visual {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 120%, rgba(165, 88, 31, 0.35), transparent 65%),
+    linear-gradient(135deg, var(--dough), #ecd9ae);
+}
+.product-visual svg {
+  width: 92px;
+  height: 92px;
+}
+.product-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  flex: 1;
+}
+.product-name {
+  font-size: 1.15rem;
+}
+.product-badge {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-radius: var(--radius-pill);
+  padding: 0.28rem 0.7rem;
+}
+.product-desc {
+  color: var(--color-muted);
+  font-size: 0.93rem;
+  flex: 1;
+}
+.product-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.product-price {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.product-price small {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+.product-foot .btn {
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+}
+
+/* ---- Paket ---- */
+.package-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 860px) {
+  .package-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.package-card {
+  background: var(--color-accent-soft);
+  border: 1px solid var(--color-line);
+}
+.package-card ul {
+  margin: 0.75rem 0 1.25rem;
+  padding-left: 1.15rem;
+  color: var(--color-muted);
+  font-size: 0.93rem;
+}
+.package-card li { margin-bottom: 0.3rem; }
+.package-price {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.package-price small {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+/* ---- Pre-order / langkah ---- */
+.preorder-box {
+  background: var(--color-ink);
+  color: var(--flour);
+  border-radius: var(--radius-md);
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+.preorder-box .section-index { color: var(--wheat); }
+.preorder-box .section-desc { color: #e8d5b5; }
+.preorder-deadline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(250, 244, 232, 0.12);
+  border: 1px dashed var(--wheat);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.1rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+}
+.steps {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+  list-style: none;
+  padding: 0;
+}
+@media (min-width: 860px) {
+  .steps { grid-template-columns: repeat(3, 1fr); }
+}
+.steps li {
+  background: rgba(250, 244, 232, 0.07);
+  border: 1px solid rgba(250, 244, 232, 0.22);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+.step-num {
+  font-family: var(--font-mono);
+  color: var(--wheat);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+.steps h3 {
+  margin: 0.4rem 0 0.35rem;
+  font-size: 1.05rem;
+}
+.steps p {
+  font-size: 0.92rem;
+  color: #e8d5b5;
+}
+
+/* ---- Testimoni ---- */
+.testi-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 860px) {
+  .testi-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.testi-card {
+  background: #fffdf8;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.testi-stars {
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  font-size: 0.95rem;
+}
+.testi-text {
+  flex: 1;
+  font-size: 0.95rem;
+}
+.testi-who strong {
+  display: block;
+  font-size: 0.95rem;
+}
+.testi-who span {
+  font-size: 0.83rem;
+  color: var(--color-muted);
+}
+
+/* ---- FAQ ---- */
+.faq-list {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 760px;
+}
+.faq-item {
+  background: #fffdf8;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-ink);
+  text-align: left;
+}
+.faq-q .faq-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.faq-q[aria-expanded="true"] .faq-icon {
+  transform: rotate(45deg);
+}
+.faq-a {
+  padding: 0 1.25rem 1.25rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+/* ---- Kontak ---- */
+.contact-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+.contact-card {
+  background: #fffdf8;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+.contact-card address {
+  font-style: normal;
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  color: var(--color-muted);
+}
+.contact-card address strong {
+  color: var(--color-ink);
+}
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--color-ink);
+  color: #f0e2c8;
+  padding: 3rem 0 1.5rem;
+  margin-top: 2rem;
+}
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 760px) {
+  .footer-grid { grid-template-columns: 1.2fr 1fr 0.8fr; }
+}
+.footer-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--flour);
+}
+.footer-tagline {
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  color: #d9c4a0;
+}
+.footer-note {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #c9ae7f;
+}
+.footer-heading {
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wheat);
+  margin-bottom: 0.75rem;
+}
+.footer-contact {
+  font-style: normal;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+}
+.footer-socials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+}
+.footer-bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(250, 244, 232, 0.18);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #c9ae7f;
+}
+
+/* ---- Pemberitahuan cadangan konten ---- */
+.content-notice {
+  background: #fff3df;
+  border-bottom: 1px solid var(--wheat);
+  color: var(--crust);
+  font-size: 0.9rem;
+  padding: 0.7rem 0;
+  text-align: center;
+}
